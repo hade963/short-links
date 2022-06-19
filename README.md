@@ -1,8 +1,8 @@
-# Short link challange .  
+# Short link challange   
 
-    project link [click here](https://hade963.github.io/short-links/)
+to view the project  [click here](https://hade963.github.io/short-links/)
 
-### بسم الله الرحمن الرحيم .  
+### بسم الله الرحمن الرحيم   
 
 اقدم لكم حل تحدي اختصار الروابط على موقع front End mointor 
 
@@ -26,9 +26,8 @@
  - fetch API 
  - clipboard API 
 
-## NOTES: 
-
-    Challange link : [Front-End-Monitor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G).
+## NOTE
+challange link: [Front End Monitor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G).
 
     
 
