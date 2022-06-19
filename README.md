@@ -1,6 +1,6 @@
 # Short link challange   
 
-to view the project  [click here](https://hade963.github.io/short-links/)
+to view the project  [click here](https://jazzy-bavarois-6d40d9.netlify.app/)
 
 ### بسم الله الرحمن الرحيم   
 
