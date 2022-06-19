@@ -1,5 +1,5 @@
-if(window.localStorage.length>0 && localStorage.getItem('link0')) { 
-
+if(window.localStorage.length > 0 && localStorage.getItem('link0')!== null) { 
+1
   let fulllink = document.createElement('div');
 
   fulllink.setAttribute('class','full-link');
@@ -16,26 +16,29 @@ if(window.localStorage.length>0 && localStorage.getItem('link0')) {
 
   box.setAttribute('class','box');
 
-  let cop = document.querySelector('button');
-
+  let cop = document.createElement('button');
+    cop.textContent = 'copy';
+  let container = document.querySelector('.prev-links');
   cop.classList.add("active","copy");
-
+  
   for(let i=0;i<localStorage.length;i++) { 
-    let url = localStorage.getItem(`link${0}`).split(',');
+    
+    let url = localStorage.getItem(`link${i}`).split(',');
+    
+    fl.textContent= url[0];
 
-    fl= url[0];
-
-    sl= url[1];
-
+    sl.textContent= url[1];
+    
     fulllink.appendChild(fl);
-
-    shortLink.appendChild(sl);
-
+    
+    shortlink.appendChild(sl);
+    
     box.appendChild(fulllink);
-
-    box.appendChild(shortLink);
-
+    
+    box.appendChild(shortlink);
+    
     box.appendChild(cop);
+    container.appendChild(box);
   }
 }
 const url = document.querySelector("#url");
@@ -44,73 +47,96 @@ const message = document.querySelector('#message');
 
 // box of link
 const container = document.querySelector('.prev-links');
+
 const box = document.createElement('div');
+
 box.classList.add('box');
+
 const containerFullLink =  document.createElement('div');
+
 containerFullLink.classList.add ('full-link');
+
 const fulllink = document.createElement('a');
+
 const containerShortedLink = document.createElement("div");
+
 const shortLink = document.createElement('a');
+
 containerShortedLink.classList.add( 'shorted-link');
+
 const copybtn = document.createElement('button');
+
 copybtn.classList.add('active');
+
 copybtn.textContent = "copy";
+
 // end box of link
 
 const form = document.forms[0];
-let counter = localStorage.length >0 ?localStorage.length:0;
+
+let counter = localStorage.length > 0 ? localStorage.length:0;
+
 form.addEventListener('submit',function(e) {
-    if(url.value ==="") { 
-      message.classList.add('error');
-      url.classList.add("error");
-      message.textContent = "Please add a link"
-    }
-    else { 
+  e.preventDefault();
+  if(url.value ==="") { 
+    message.classList.add('error');
+    
+    url.classList.add("error");
+    
+    message.textContent = "Please add a link"
+  }
+  else { 
       message.textContent = "";
+
       message.classList.remove('error');
+
       url.classList.remove('error');
-      fetch(`https://api.shrtco.de/v2/shorten?url=${url.value}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        fulllink.textContent = data.result.original_link;
-        containerFullLink.appendChild(fulllink);
-        shortLink.textContent = data.result.short_link;
+
+      let localstorageprev = localStorage.getItem(`link${counter-1}`) !==null ? localStorage.getItem(`link${counter-1}`).split(','):
+      [];
+      if(localstorageprev[0] !==url.value) {
+      
+        fetch(`https://api.shrtco.de/v2/shorten?url=${url.value}`)
+
+        .then(res => res.json())
+
+        .then(data => {
+          
+          fulllink.textContent = data.result.original_link;
+          
+          containerFullLink.appendChild(fulllink);
+          
+          shortLink.textContent = data.result.short_link;
+ 
+          window.localStorage.setItem(`link${counter}`,`${fulllink.textContent},${shortLink.textContent}`);
+          
         containerShortedLink.appendChild(shortLink);
+
         box.appendChild(containerFullLink);
+
         box.appendChild(containerShortedLink);
+
+        
         copybtn.classList.add('copy');
+        
         box.appendChild(copybtn);
-        console.log(box);
+
+
         container.appendChild(box);
-        window.localStorage.setItem(`link${counter}`,`${fulllink},${shortLink}`);
+        
+
         counter++;
+
       })
       .catch(error => console.log(error));
     }
-  e.preventDefault();
+    else {
+    }
+  }
 });
 
-/*
-example : 
-{ok: true, result: {…}}
-ok: true
-result:
-code: "jnlFvN"
-full_share_link: "https://shrtco.de/share/jnlFvN"
-full_short_link: "https://shrtco.de/jnlFvN"
-full_short_link2: "https://9qr.de/jnlFvN"
-full_short_link3: "https://shiny.link/jnlFvN"
-original_link: "https://elzero.org"
-share_link: "shrtco.de/share/jnlFvN"
-short_link: "shrtco.de/jnlFvN"
-short_link2: "9qr.de/jnlFvN"
-short_link3: "shiny.link/jnlFvN"
-
- */
 // copy text to clipboard after press the copy button 
-// navigator.clipboard.readText().then()
-  let copys = document.getElementsByClassName('copy');
+
 
   document.addEventListener('click', function(e) { 
 
@@ -120,7 +146,6 @@ short_link3: "shiny.link/jnlFvN"
       if(e.target.classList.contains('copy')) {
 
         let link = parent.children[1].children[0].textContent;
-        console.log(link);
         navigator.clipboard.writeText(link)
         .catch(e=>console.log(e))
 
