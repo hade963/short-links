@@ -1,6 +1,6 @@
 # Short link challange .  
 
-    project link (click here)[https://hade963.github.io/short-links/]
+    project link [click here](https://hade963.github.io/short-links/)
 
 ### بسم الله الرحمن الرحيم .  
 
@@ -22,13 +22,13 @@
  - html
  - css
  - javascript  
- - (short code API)[https://shrtco.de/]
+ - [short code API](https://shrtco.de/)
  - fetch API 
  - clipboard API 
 
 ## NOTES: 
 
-    Challange link : (Front-End-Monitor)[https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G].
+    Challange link : [Front-End-Monitor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G).
 
     
 
